@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mariadb:
+    container_name: todoapp-mariadb
+    environment:
+      - MARIADB_DATABASE=todoapp
+      - MARIADB_USER=root
+      - MARIADB_PASSWORD=myroot
+      - MARIADB_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - mariadb:/var/lib/mysql
+    image: 'mariadb:latest'
+
+
+volumes:
+  mariadb:
