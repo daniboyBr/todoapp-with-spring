@@ -20,7 +20,22 @@
             <div>
                 <span th:text="${task.title}">Task Title</span>
             </div>
+            <div>
+                <button type="button" th:attr="data-task-id=${task.id}" onclick="deleteTask(this)">Delete</button>
+            </div>
         </th:block>
     </div>
+    <script>
+        const deleteTask = (element) => {
+            const taskId =  element.dataset.taskId;
+            
+            fetch(`/tasks/${taskId}/delete`, {
+                method: 'DELETE'
+            }).then((response) => {
+                window.location.reload()
+            })
+            
+        }
+    </script>
 </body>
 </html>
