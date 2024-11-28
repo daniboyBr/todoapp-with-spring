@@ -1,18 +1,37 @@
-version: '3'
+version: '3.8'
+
+volumes:
+  mariadb:
+
+networks:
+  todoapp_network:
+    driver: bridge
+
 services:
   mariadb:
     container_name: todoapp-mariadb
     environment:
-      - MARIADB_DATABASE=todoapp
-      - MARIADB_USER=root
-      - MARIADB_PASSWORD=myroot
-      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=${DATABASE_NAME}
+      - MARIADB_USER=${DATABASE_USER}
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${DATABASE_PASSWORD}
     ports:
       - 3306:3306
     volumes:
       - mariadb:/var/lib/mysql
+    networks:
+      - todoapp_network
     image: 'mariadb:latest'
 
+  todoapp:
+    container_name: todoapp-applications
+    build: .
+    depends_on:
+       - mariadb 
+    ports:
+      - 8080:8080
+    networks:
+      - todoapp_network
 
-volumes:
-  mariadb:
+
+
