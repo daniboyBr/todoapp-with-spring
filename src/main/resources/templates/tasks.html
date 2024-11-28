@@ -18,10 +18,11 @@
         </form>
         <th:block th:each="task : ${tasks}">
             <div>
-                <span th:text="${task.title}">Task Title</span>
+                <span th:text="${task.title}" th:style="${task.completed ? 'text-decoration: line-through;' : ''}" >Task Title</span>
             </div>
             <div>
                 <button type="button" th:attr="data-task-id=${task.id}" onclick="deleteTask(this)">Delete</button>
+                <button type="button" th:attr="data-task-id=${task.id}" onclick="toggleTask(this)">Toggle</button>
             </div>
         </th:block>
     </div>
@@ -34,6 +35,17 @@
             }).then((response) => {
                 window.location.reload()
             })
+            
+        }
+
+        const toggleTask = (element) => {
+            const taskId =  element.dataset.taskId;
+            
+            fetch(`/tasks/${taskId}/toggle`, {
+                method: 'PUT'
+            }).then((response) => {
+                window.location.reload()
+            }).catch((error) => {})
             
         }
     </script>
