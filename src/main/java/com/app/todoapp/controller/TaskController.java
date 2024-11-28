@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +43,12 @@ public class TaskController {
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @PutMapping("/{id}/toggle")
+    public ResponseEntity<Void> toggleTask(@PathVariable Long id) {
+        taskService.toggleTask(id);
         return ResponseEntity.noContent().build();
     }
     
