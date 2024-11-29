@@ -97,8 +97,6 @@ Install todoapp-with-spring using one of the following methods:
 ❯ cd todoapp-with-spring
 ```
 
-3. Install the project dependencies:
-
 ###  Usage
 Run todoapp-with-spring using the following command:
 **Using `docker`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" />](https://www.docker.com/)
